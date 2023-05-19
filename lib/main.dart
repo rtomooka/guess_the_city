@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:guess_the_city/gen/assets.gen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -35,7 +37,15 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: const Text("○○市をクリック"),
       ),
-      body: const Placeholder(),
+      body: SvgPicture.asset(
+        Assets.maps.shizuoka19,
+        width: 100,
+        height: 100,
+        colorFilter: ColorFilter.mode(
+          Colors.red,
+          BlendMode.srcIn,
+        ),
+      ),
     );
   }
 }
