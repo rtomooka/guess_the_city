@@ -37,13 +37,9 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: const Text("○○市をクリック"),
       ),
-      body: SvgPicture.asset(
-        Assets.maps.shizuoka19,
-        width: 100,
-        height: 100,
-        colorFilter: ColorFilter.mode(
-          Colors.red,
-          BlendMode.srcIn,
+      body: Center(
+        child: SvgPicture.asset(
+          Assets.maps.sampleDrawio,
         ),
       ),
     );

@@ -12,11 +12,14 @@ import 'package:flutter/widgets.dart';
 class $AssetsMapsGen {
   const $AssetsMapsGen();
 
+  /// File path: assets/maps/sample.drawio.svg
+  String get sampleDrawio => 'assets/maps/sample.drawio.svg';
+
   /// File path: assets/maps/shizuoka19.svg
   String get shizuoka19 => 'assets/maps/shizuoka19.svg';
 
   /// List of all assets
-  List<String> get values => [shizuoka19];
+  List<String> get values => [sampleDrawio, shizuoka19];
 }
 
 class Assets {
