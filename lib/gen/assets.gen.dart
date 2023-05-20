@@ -12,6 +12,9 @@ import 'package:flutter/widgets.dart';
 class $AssetsMapsGen {
   const $AssetsMapsGen();
 
+  /// File path: assets/maps/Japan_template_large.svg
+  String get japanTemplateLarge => 'assets/maps/Japan_template_large.svg';
+
   /// File path: assets/maps/sample.drawio.svg
   String get sampleDrawio => 'assets/maps/sample.drawio.svg';
 
@@ -19,7 +22,7 @@ class $AssetsMapsGen {
   String get shizuoka19 => 'assets/maps/shizuoka19.svg';
 
   /// List of all assets
-  List<String> get values => [sampleDrawio, shizuoka19];
+  List<String> get values => [japanTemplateLarge, sampleDrawio, shizuoka19];
 }
 
 class Assets {

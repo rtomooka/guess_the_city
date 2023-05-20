@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:guess_the_city/gen/assets.gen.dart';
+import 'package:guess_the_city/svg_map.dart';
 
 void main() {
   runApp(const MyApp());
@@ -37,11 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: const Text("○○市をクリック"),
       ),
-      body: Center(
-        child: SvgPicture.asset(
-          Assets.maps.sampleDrawio,
-        ),
-      ),
+      body: SvgMap(),
     );
   }
 }
