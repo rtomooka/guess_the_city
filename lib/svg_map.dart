@@ -31,7 +31,7 @@ class _SvgMapState extends State<SvgMap> {
     });
 
     // map読み込み
-    rootBundle.load(Assets.maps.japanTemplateLarge).then((ByteData byteData) {
+    rootBundle.load(Assets.maps.shizuoka19).then((ByteData byteData) {
       debugPrint("load: ${byteData.lengthInBytes}");
 
       // バイナリとして読み込み >> 文字列に変換 >> XML要素に変換
@@ -50,11 +50,11 @@ class _SvgMapState extends State<SvgMap> {
           final paths = node.findAllElements("path");
           paths.forEach((element) {
             final data = element.getAttribute("d");
-            debugPrint("data: $data");
+            // debugPrint("data: $data");
             final printName = _prefecture_name[_prefecture_id[id]];
             shapes.add(MapShape(
               data,
-              printName!,
+              printName != null ? printName! : "Invalid Name",
               (_emergency_state.contains(_prefecture_id[id]))
                   ? Colors.orange
                   : Colors.white,

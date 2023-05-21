@@ -17,7 +17,7 @@ class SvgMapPainter extends CustomPainter {
       _size = size;
       final fs = applyBoxFit(
         BoxFit.contain,
-        Size(1400, 1600),
+        Size(29700, 21000),
         size,
       );
       final rect =
