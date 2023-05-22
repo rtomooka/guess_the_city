@@ -64,7 +64,7 @@ class SvgMapPainter extends CustomPainter {
         ..color = Colors.black
         ..maskFilter = MaskFilter.blur(BlurStyle.outer, 12)
         ..style = PaintingStyle.fill;
-      canvas.drawPath(selectedMapShape._transformedPath, _paint);
+      canvas.drawPath(selectedMapShape.transformedPath, _paint);
       _paint.maskFilter = null;
 
       final builder = ui.ParagraphBuilder(ui.ParagraphStyle(
@@ -74,7 +74,7 @@ class SvgMapPainter extends CustomPainter {
         ..pushStyle(ui.TextStyle(
           color: Colors.yellow,
         ))
-        ..addText(selectedMapShape._label);
+        ..addText(selectedMapShape.label);
       final paragraph = builder.build()
         ..layout(ui.ParagraphConstraints(width: size.width));
       canvas.drawParagraph(paragraph, notifier.value.translate(0, -32));
