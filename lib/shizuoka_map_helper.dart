@@ -42,6 +42,7 @@ final _prefecture_id = {
   'yamanashi': 37,
   'gifu': 38,
   'aichi': 39,
+  'huji': 40,
 };
 
 final _prefecture_name = {
@@ -59,7 +60,7 @@ final _prefecture_name = {
   12: '掛川市',
   13: '函南町',
   14: '川根本町',
-  15: '河津長',
+  15: '河津町',
   16: '菊川市',
   17: '湖西市',
   18: '牧之原市',
@@ -84,6 +85,7 @@ final _prefecture_name = {
   37: '山梨県',
   38: '岐阜県',
   39: '愛知県',
+  40: '富士市',
 };
 
 final _emergency_state = [
