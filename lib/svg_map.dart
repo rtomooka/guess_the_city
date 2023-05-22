@@ -7,7 +7,7 @@ import 'package:guess_the_city/map_shape.dart';
 import 'package:guess_the_city/svg_map_painter.dart';
 import 'package:xml/xml.dart';
 
-part 'japan_map_helper.dart';
+part 'shizuoka_map_helper.dart';
 
 class SvgMap extends StatefulWidget {
   const SvgMap({Key? key}) : super(key: key);
