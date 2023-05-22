@@ -36,7 +36,9 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: const Text("○○市をクリック"),
       ),
-      body: SvgMap(),
+      body: Center(
+        child: SvgMap(),
+      ),
     );
   }
 }
