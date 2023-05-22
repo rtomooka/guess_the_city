@@ -55,9 +55,12 @@ class _SvgMapState extends State<SvgMap> {
             shapes.add(MapShape(
               data,
               printName != null ? printName! : "Invalid Name",
-              (_emergency_state.contains(_prefecture_id[id]))
-                  ? Colors.orange
-                  : Colors.white,
+              Color.fromRGBO(
+                60,
+                128,
+                74,
+                1.0,
+              ),
             ));
           });
         }

@@ -36,7 +36,12 @@ class SvgMapPainter extends CustomPainter {
         Offset.zero & size,
       )
       ..drawColor(
-        Colors.blueGrey,
+        Color.fromRGBO(
+          172,
+          207,
+          219,
+          1.0,
+        ),
         BlendMode.src,
       );
 
@@ -46,14 +51,21 @@ class SvgMapPainter extends CustomPainter {
         final path = shape.transformedPath;
         final selected = path!.contains(notifier.value);
         _paint
-          ..color = selected ? Colors.teal : shape.color
+          ..color = selected
+              ? Color.fromRGBO(
+                  179,
+                  77,
+                  68,
+                  1.0,
+                )
+              : shape.color
           ..style = PaintingStyle.fill;
         canvas.drawPath(path, _paint);
         selectedMapShape ??= selected ? shape : null;
 
         _paint
-          ..color = Colors.black
-          ..strokeWidth = 3
+          ..color = Colors.white
+          ..strokeWidth = 0.1
           ..style = PaintingStyle.stroke;
         canvas.drawPath(path, _paint);
       }
