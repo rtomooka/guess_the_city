@@ -4,9 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:guess_the_city/map_shape.dart';
 
 class SvgMapPainter extends CustomPainter {
-  SvgMapPainter({required this.shapes, required this.notifier})
-      : super(repaint: notifier);
+  SvgMapPainter({
+    required this.shapes,
+    required this.notifier,
+    required this.ids,
+  }) : super(repaint: notifier);
   final List<MapShape>? shapes;
+  final List<String> ids;
   final ValueNotifier<Offset> notifier;
   final Paint _paint = Paint();
   Size _size = Size.zero;
@@ -17,7 +21,7 @@ class SvgMapPainter extends CustomPainter {
       _size = size;
       final fs = applyBoxFit(
         BoxFit.contain,
-        Size(29700, 21000),
+        const Size(29700, 21000),
         size,
       );
       final rect =
@@ -36,31 +40,33 @@ class SvgMapPainter extends CustomPainter {
         Offset.zero & size,
       )
       ..drawColor(
-        Color.fromRGBO(
-          172,
-          207,
-          219,
-          1.0,
-        ),
+        const Color.fromRGBO(172, 207, 219, 1.0),
         BlendMode.src,
       );
 
     var selectedMapShape;
+
+    print("${ids.first}をクリック");
+
     if (shapes != null) {
       for (var shape in shapes!) {
         final path = shape.transformedPath;
         final selected = path!.contains(notifier.value);
+        // 正解!
+        if (selected) {
+          if (shape.enable && (shape.id == ids.first)) {
+            shape.enable = false;
+            shape.color = Colors.white;
+            ids.removeAt(0);
+          } else {
+            // shape.color = const Color.fromRGBO(179, 77, 68, 1.0);
+          }
+        }
         _paint
-          ..color = selected
-              ? Color.fromRGBO(
-                  179,
-                  77,
-                  68,
-                  1.0,
-                )
-              : shape.color
+          ..color = shape.color
           ..style = PaintingStyle.fill;
         canvas.drawPath(path, _paint);
+
         selectedMapShape ??= selected ? shape : null;
 
         _paint
@@ -74,7 +80,7 @@ class SvgMapPainter extends CustomPainter {
     if (selectedMapShape != null) {
       _paint
         ..color = Colors.black
-        ..maskFilter = MaskFilter.blur(BlurStyle.outer, 12)
+        ..maskFilter = const MaskFilter.blur(BlurStyle.outer, 12)
         ..style = PaintingStyle.fill;
       canvas.drawPath(selectedMapShape.transformedPath, _paint);
       _paint.maskFilter = null;

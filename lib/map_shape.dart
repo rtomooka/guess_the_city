@@ -5,13 +5,17 @@ class MapShape {
   final Path _path;
   Path? transformedPath;
   final String label;
-  final Color color;
+  Color color;
+  bool enable;
+  final String id;
 
   MapShape(
-    strPath,
-    this.label,
-    this.color,
-  ) : _path = parseSvgPathData(strPath);
+    strPath, {
+    required this.label,
+    required this.color,
+    required this.enable,
+    required this.id,
+  }) : _path = parseSvgPathData(strPath);
 
   void transform(Matrix4 matrix4) {
     transformedPath = _path.transform(matrix4.storage);

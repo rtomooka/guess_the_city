@@ -18,6 +18,7 @@ class SvgMap extends StatefulWidget {
 
 class _SvgMapState extends State<SvgMap> {
   List<MapShape>? _shapes;
+  List<String> ids = [];
   late final ValueNotifier<Offset> notifier;
 
   @override
@@ -54,19 +55,19 @@ class _SvgMapState extends State<SvgMap> {
             final printName = _prefecture_name[_prefecture_id[id]];
             shapes.add(MapShape(
               data,
-              printName != null ? printName! : "Invalid Name",
-              Color.fromRGBO(
-                60,
-                128,
-                74,
-                1.0,
-              ),
+              label: printName != null ? printName! : "Invalid Name",
+              color: const Color.fromRGBO(60, 128, 74, 1.0),
+              enable: true,
+              id: id,
             ));
           });
+          // idの格納
+          ids.add(id);
         }
       });
       setState(() {
         _shapes = shapes;
+        ids.shuffle();
       });
     });
   }
@@ -81,8 +82,12 @@ class _SvgMapState extends State<SvgMap> {
         notifier.value = event.localPosition;
       },
       child: CustomPaint(
-        painter: SvgMapPainter(notifier: notifier, shapes: _shapes),
-        child: SizedBox.expand(),
+        painter: SvgMapPainter(
+          notifier: notifier,
+          shapes: _shapes,
+          ids: ids,
+        ),
+        child: const SizedBox.expand(),
       ),
     );
   }
