@@ -9,6 +9,10 @@
   - 作っていて楽しい
   - 遊べる
 
+## 地図の入手方法
+
+[d-maps.com](https://d-maps.com/continent.php?num_con=16&lang=ja)からダウンロードする  
+
 ## ToDo
 
 - [×] 地図アセットの表示
