@@ -74,11 +74,8 @@ class _SvgMapState extends State<SvgMap> {
 
   @override
   Widget build(BuildContext context) {
-    return Listener(
-      onPointerDown: (event) {
-        notifier.value = event.localPosition;
-      },
-      onPointerMove: (event) {
+    return GestureDetector(
+      onTapDown: (event) {
         notifier.value = event.localPosition;
       },
       child: CustomPaint(
