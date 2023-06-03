@@ -4,10 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:guess_the_city/gen/assets.gen.dart';
 import 'package:guess_the_city/map_shape.dart';
+import 'package:guess_the_city/shizuoka_map_helper.dart';
 import 'package:guess_the_city/svg_map_painter.dart';
 import 'package:xml/xml.dart';
-
-part 'shizuoka_map_helper.dart';
 
 class SvgMap extends StatefulWidget {
   const SvgMap({Key? key}) : super(key: key);
@@ -52,10 +51,11 @@ class _SvgMapState extends State<SvgMap> {
           paths.forEach((element) {
             final data = element.getAttribute("d");
             // debugPrint("data: $data");
-            final printName = _prefecture_name[_prefecture_id[id]];
+            final printName =
+                Prefecture.prefecture_name[Prefecture.prefecture_id[id]];
             shapes.add(MapShape(
               data,
-              label: printName != null ? printName! : "Invalid Name",
+              label: printName ?? "Invalid Name",
               color: const Color.fromRGBO(60, 128, 74, 1.0),
               enable: true,
               id: id,
@@ -67,6 +67,7 @@ class _SvgMapState extends State<SvgMap> {
       });
       setState(() {
         _shapes = shapes;
+        // ゲーム性向上のために、IDをシャッフルする
         ids.shuffle();
       });
     });

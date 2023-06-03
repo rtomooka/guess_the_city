@@ -26,7 +26,7 @@ MapShapeクラスを改造をする
 
 - idを追加して、正解の判定に使う 
 - enableを追加して、回答済みのエリアをクリックしても反応しないようにする
-- ListenerをGestureDetectorに変更してクリックだけを受け付けるようにする
+- [×] ListenerをGestureDetectorに変更してクリックだけを受け付けるようにする
 
 回答までの時間を計測するタイマーを作る
 
