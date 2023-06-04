@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$MapId {
-  String get id => throw _privateConstructorUsedError;
+  List<String> get id => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MapIdCopyWith<MapId> get copyWith => throw _privateConstructorUsedError;
@@ -27,7 +27,7 @@ abstract class $MapIdCopyWith<$Res> {
   factory $MapIdCopyWith(MapId value, $Res Function(MapId) then) =
       _$MapIdCopyWithImpl<$Res, MapId>;
   @useResult
-  $Res call({String id});
+  $Res call({List<String> id});
 }
 
 /// @nodoc
@@ -49,7 +49,7 @@ class _$MapIdCopyWithImpl<$Res, $Val extends MapId>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as List<String>,
     ) as $Val);
   }
 }
@@ -60,7 +60,7 @@ abstract class _$$_MapIdCopyWith<$Res> implements $MapIdCopyWith<$Res> {
       __$$_MapIdCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id});
+  $Res call({List<String> id});
 }
 
 /// @nodoc
@@ -76,9 +76,9 @@ class __$$_MapIdCopyWithImpl<$Res> extends _$MapIdCopyWithImpl<$Res, _$_MapId>
   }) {
     return _then(_$_MapId(
       id: null == id
-          ? _value.id
+          ? _value._id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as List<String>,
     ));
   }
 }
@@ -86,10 +86,15 @@ class __$$_MapIdCopyWithImpl<$Res> extends _$MapIdCopyWithImpl<$Res, _$_MapId>
 /// @nodoc
 
 class _$_MapId implements _MapId {
-  const _$_MapId({required this.id});
+  const _$_MapId({required final List<String> id}) : _id = id;
 
+  final List<String> _id;
   @override
-  final String id;
+  List<String> get id {
+    if (_id is EqualUnmodifiableListView) return _id;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_id);
+  }
 
   @override
   String toString() {
@@ -101,11 +106,12 @@ class _$_MapId implements _MapId {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_MapId &&
-            (identical(other.id, id) || other.id == id));
+            const DeepCollectionEquality().equals(other._id, _id));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id);
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_id));
 
   @JsonKey(ignore: true)
   @override
@@ -115,10 +121,10 @@ class _$_MapId implements _MapId {
 }
 
 abstract class _MapId implements MapId {
-  const factory _MapId({required final String id}) = _$_MapId;
+  const factory _MapId({required final List<String> id}) = _$_MapId;
 
   @override
-  String get id;
+  List<String> get id;
   @override
   @JsonKey(ignore: true)
   _$$_MapIdCopyWith<_$_MapId> get copyWith =>

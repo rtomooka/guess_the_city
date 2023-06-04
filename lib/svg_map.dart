@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:guess_the_city/map_shape.dart';
 import 'package:guess_the_city/svg_map_painter.dart';
+import 'package:guess_the_city/view_model/map_id_notifier.dart';
 import 'package:guess_the_city/view_model/map_shapes_notifier.dart';
 
 class SvgMap extends ConsumerStatefulWidget {
@@ -31,6 +32,7 @@ class SvgMapState extends ConsumerState<SvgMap> {
     ref.watch(mapShapesProvider.notifier).updateSize(size);
 
     final shapes = ref.watch(mapShapesProvider);
+    final mapId = ref.read(mapIdProvider);
 
     return GestureDetector(
       onTapDown: (event) {
@@ -39,9 +41,10 @@ class SvgMapState extends ConsumerState<SvgMap> {
           final path = shape.transformedPath;
           final selected = path!.contains(event.localPosition);
 
-          if (selected) {
+          if (selected && (shape.id == mapId.id.first)) {
             shape.enable = false;
             shape.color = Colors.white;
+            ref.watch(mapIdProvider.notifier).removeMapId();
           }
           mapShapes.add(shape);
         }

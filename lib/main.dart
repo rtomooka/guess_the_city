@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:guess_the_city/shizuoka_map_helper.dart';
 import 'package:guess_the_city/svg_map.dart';
+import 'package:guess_the_city/view_model/map_id_notifier.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
@@ -21,29 +23,32 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatefulWidget {
+class MyHomePage extends ConsumerStatefulWidget {
   const MyHomePage({
     super.key,
   });
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  ConsumerState<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends ConsumerState<MyHomePage> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    final mapId = ref.watch(mapIdProvider);
+    final printName =
+        Prefecture.prefecture_name[Prefecture.prefecture_id[mapId.id.first]];
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text("○○市をクリック"),
+        title: mapId.id.isNotEmpty ? Text("$printNameをクリック") : const Text(""),
       ),
-      body: Center(
+      body: const Center(
         child: SvgMap(),
       ),
     );
