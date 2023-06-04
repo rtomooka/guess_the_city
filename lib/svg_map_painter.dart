@@ -1,16 +1,36 @@
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:guess_the_city/map_shape.dart';
+import 'package:guess_the_city/view_model/map_id_notifier.dart';
+
+class SvgMapPainterWidget extends ConsumerWidget {
+  final List<MapShape>? shapes;
+  final ValueNotifier<Offset> notifier;
+
+  const SvgMapPainterWidget({
+    required this.shapes,
+    required this.notifier,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final id = ref.watch(mapIdProvider);
+    // TODO: implement build
+    return Container(
+      color: Colors.orange,
+    );
+  }
+}
 
 class SvgMapPainter extends CustomPainter {
   SvgMapPainter({
     required this.shapes,
     required this.notifier,
-    required this.ids,
   }) : super(repaint: notifier);
   final List<MapShape>? shapes;
-  final List<String> ids;
   final ValueNotifier<Offset> notifier;
   final Paint _paint = Paint();
   Size _size = Size.zero;
@@ -46,22 +66,22 @@ class SvgMapPainter extends CustomPainter {
 
     var selectedMapShape;
 
-    print("${ids.first}をクリック");
+    // print("${ids.first}をクリック");
 
     if (shapes != null) {
       for (var shape in shapes!) {
         final path = shape.transformedPath;
         final selected = path!.contains(notifier.value);
         // 正解!
-        if (selected) {
-          if (shape.enable && (shape.id == ids.first)) {
-            shape.enable = false;
-            shape.color = Colors.white;
-            ids.removeAt(0);
-          } else {
-            // shape.color = const Color.fromRGBO(179, 77, 68, 1.0);
-          }
-        }
+        // if (selected) {
+        //   if (shape.enable && (shape.id == ids.first)) {
+        //     shape.enable = false;
+        //     shape.color = Colors.white;
+        //     ids.removeAt(0);
+        //   } else {
+        //     // shape.color = const Color.fromRGBO(179, 77, 68, 1.0);
+        //   }
+        // }
         _paint
           ..color = shape.color
           ..style = PaintingStyle.fill;

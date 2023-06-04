@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:guess_the_city/gen/assets.gen.dart';
@@ -22,7 +23,9 @@ class MapShapesNotifier extends StateNotifier<MapShapes> {
     List<MapShape> mapShapes = [];
 
     // map読み込み
-    rootBundle.load(Assets.maps.shizuoka19).then((ByteData byteData) {
+    await rootBundle.load(Assets.maps.shizuoka19).then((ByteData byteData) {
+      debugPrint("load: ${byteData.lengthInBytes}");
+
       // バイナリとして読み込み >> 文字列に変換 >> XML要素に変換
       final document =
           XmlDocument.parse(utf8.decode(byteData.buffer.asUint8List()));
@@ -36,6 +39,7 @@ class MapShapesNotifier extends StateNotifier<MapShapes> {
           final paths = node.findAllElements("path");
           paths.forEach((element) {
             final data = element.getAttribute("d");
+            // debugPrint("data: $data");
             final printName =
                 Prefecture.prefecture_name[Prefecture.prefecture_id[id]];
             mapShapes.add(MapShape(
@@ -50,9 +54,7 @@ class MapShapesNotifier extends StateNotifier<MapShapes> {
       });
     });
 
-    state = state.copyWith(
-      mapShapes: mapShapes,
-    );
+    state = state.copyWith(mapShapes: mapShapes);
   }
 }
 
