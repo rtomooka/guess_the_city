@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:guess_the_city/map_shape.dart';
 import 'package:guess_the_city/svg_map_painter.dart';
 import 'package:guess_the_city/view_model/map_shapes_notifier.dart';
 
@@ -26,11 +27,31 @@ class SvgMapState extends ConsumerState<SvgMap> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    ref.watch(mapShapesProvider.notifier).updateSize(size);
+
     final shapes = ref.watch(mapShapesProvider);
-    // debugPrint("watch: ${shapes.mapShapes}");
 
     return GestureDetector(
       onTapDown: (event) {
+        List<MapShape> mapShapes = [];
+        for (var shape in shapes.mapShapes) {
+          final path = shape.transformedPath;
+          final selected = path!.contains(event.localPosition);
+
+          if (selected) {
+            shape.enable = false;
+            shape.color = Colors.white;
+          }
+          mapShapes.add(shape);
+        }
+
+        // 更新
+        ref.watch(mapShapesProvider.notifier).updateMapShapes(
+              mapShapes: mapShapes,
+            );
+
+        // クリック位置を通知
         notifier.value = event.localPosition;
       },
       child: CustomPaint(

@@ -14,17 +14,18 @@ class MapShapesNotifier extends StateNotifier<MapShapes> {
     parseSvgData();
   }
 
-  //
+  // map更新
   void updateMapShapes({required List<MapShape> mapShapes}) {
     state = state.copyWith(mapShapes: mapShapes);
   }
 
+  // SVGファイル読み込み
   Future<void> parseSvgData() async {
     List<MapShape> mapShapes = [];
 
     // map読み込み
     await rootBundle.load(Assets.maps.shizuoka19).then((ByteData byteData) {
-      debugPrint("load: ${byteData.lengthInBytes}");
+      // debugPrint("load: ${byteData.lengthInBytes}");
 
       // バイナリとして読み込み >> 文字列に変換 >> XML要素に変換
       final document =
@@ -53,8 +54,24 @@ class MapShapesNotifier extends StateNotifier<MapShapes> {
         }
       });
     });
-
     state = state.copyWith(mapShapes: mapShapes);
+  }
+
+  Future<void> updateSize(Size size) async {
+    final fs = applyBoxFit(
+      BoxFit.contain,
+      const Size(29700, 21000),
+      size,
+    );
+    final rect = Alignment.center.inscribe(fs.destination, Offset.zero & size);
+    final matrix = Matrix4.translationValues(rect.left, rect.top, 0)
+      ..scale(fs.destination.width / fs.source.width);
+    if (state.mapShapes.isNotEmpty) {
+      for (var shape in state.mapShapes) {
+        shape.transform(matrix);
+      }
+    }
+    state = state.copyWith(mapShapes: state.mapShapes);
   }
 }
 
