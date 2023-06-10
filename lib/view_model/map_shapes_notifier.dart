@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -75,7 +76,15 @@ class MapShapesNotifier extends StateNotifier<MapShapes> {
   }
 }
 
-final mapShapesProvider =
-    StateNotifierProvider.autoDispose<MapShapesNotifier, MapShapes>(
+final mapShapesProvider = StateNotifierProvider<MapShapesNotifier, MapShapes>(
   (ref) => MapShapesNotifier(),
 );
+
+MapShape? getRandomEnabledMapShape(List<MapShape> mapShapes) {
+  final enabledObjects = mapShapes.where((obj) => obj.enable).toList();
+  if (enabledObjects.isEmpty) {
+    return null; // enableがtrueのオブジェクトが存在しない場合はnullを返す
+  }
+  final randomObject = enabledObjects[Random().nextInt(enabledObjects.length)];
+  return randomObject;
+}

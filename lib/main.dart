@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:guess_the_city/shizuoka_map_helper.dart';
 import 'package:guess_the_city/svg_map.dart';
-import 'package:guess_the_city/view_model/map_id_notifier.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
@@ -40,13 +38,9 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final mapId = ref.watch(mapIdProvider);
-    final printName =
-        Prefecture.prefecture_name[Prefecture.prefecture_id[mapId.id.first]];
-
     return Scaffold(
       appBar: AppBar(
-        title: mapId.id.isNotEmpty ? Text("$printNameをクリック") : const Text(""),
+        title: const Text("Guess The City"),
       ),
       body: const Center(
         child: SvgMap(),

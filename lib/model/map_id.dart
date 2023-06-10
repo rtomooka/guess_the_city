@@ -6,6 +6,6 @@ part 'map_id.freezed.dart';
 @freezed
 class MapId with _$MapId {
   const factory MapId({
-    required List<String> id,
+    required String id,
   }) = _MapId;
 }

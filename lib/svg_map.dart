@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:guess_the_city/map_shape.dart';
+import 'package:guess_the_city/shizuoka_map_helper.dart';
 import 'package:guess_the_city/svg_map_painter.dart';
 import 'package:guess_the_city/view_model/map_id_notifier.dart';
 import 'package:guess_the_city/view_model/map_shapes_notifier.dart';
@@ -28,42 +29,90 @@ class SvgMapState extends ConsumerState<SvgMap> {
 
   @override
   Widget build(BuildContext context) {
+    final shapes = ref.watch(mapShapesProvider).mapShapes;
+    final mapId = ref.watch(mapIdProvider).id;
+
+    if (shapes.isEmpty) {
+      // 初期化が完了するまでローディング表示
+      return const CircularProgressIndicator();
+    }
+
+    // 画面サイズに応じてリサイズ
     final size = MediaQuery.of(context).size;
     ref.watch(mapShapesProvider.notifier).updateSize(size);
 
-    final shapes = ref.watch(mapShapesProvider);
-    final mapId = ref.read(mapIdProvider);
+    final printName =
+        Prefecture.prefecture_name[Prefecture.prefecture_id[mapId]];
 
-    return GestureDetector(
-      onTapDown: (event) {
-        List<MapShape> mapShapes = [];
-        for (var shape in shapes.mapShapes) {
-          final path = shape.transformedPath;
-          final selected = path!.contains(event.localPosition);
-
-          if (selected && (shape.id == mapId.id.first)) {
-            shape.enable = false;
-            shape.color = Colors.white;
-            ref.watch(mapIdProvider.notifier).removeMapId();
-          }
-          mapShapes.add(shape);
-        }
-
-        // 更新
-        ref.watch(mapShapesProvider.notifier).updateMapShapes(
-              mapShapes: mapShapes,
-            );
-
-        // クリック位置を通知
-        notifier.value = event.localPosition;
-      },
-      child: CustomPaint(
-        painter: SvgMapPainter(
-          notifier: notifier,
-          shapes: shapes.mapShapes,
+    return Flex(
+      direction: Axis.vertical,
+      children: [
+        Expanded(
+          flex: 1,
+          child: Container(
+            color: Colors.orange,
+            child: Center(
+              child: Text(
+                "$printNameを選択してください",
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                ),
+              ),
+            ),
+          ),
         ),
-        child: const SizedBox.expand(),
-      ),
+        Expanded(
+          flex: 15,
+          child: GestureDetector(
+            onTapDown: (event) {
+              // タップイベントの処理
+              List<MapShape> mapShapes = [];
+              bool updateFlag = false;
+              for (var shape in shapes) {
+                final path = shape.transformedPath;
+                final selected = path!.contains(event.localPosition);
+
+                // 正解
+                if (selected && (shape.id == mapId)) {
+                  shape.enable = false;
+                  shape.color = Colors.white;
+                  updateFlag = true;
+                }
+                mapShapes.add(shape);
+              }
+
+              // idを更新
+              if (updateFlag) {
+                // enableなshapeを1つ選択する
+                final MapShape? mapShape = getRandomEnabledMapShape(mapShapes);
+                if (mapShape != null) {
+                  ref.watch(mapIdProvider.notifier).updateMapId(
+                        mapId: mapShape.id,
+                      );
+                } else {
+                  // ToDo ゲームの終了処理を入れる
+                }
+              }
+
+              // 更新
+              ref.read(mapShapesProvider.notifier).updateMapShapes(
+                    mapShapes: mapShapes,
+                  );
+
+              // クリック位置を通知
+              notifier.value = event.localPosition;
+            },
+            child: CustomPaint(
+              painter: SvgMapPainter(
+                notifier: notifier,
+                shapes: shapes,
+              ),
+              child: const SizedBox.expand(),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
