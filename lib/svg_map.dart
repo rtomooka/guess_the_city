@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:guess_the_city/map_shape.dart';
 import 'package:guess_the_city/shizuoka_map_helper.dart';
 import 'package:guess_the_city/svg_map_painter.dart';
@@ -28,6 +29,14 @@ class SvgMapState extends ConsumerState<SvgMap> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    // ゲームの初期化
+    ref.watch(mapShapesProvider.notifier).parseSvgData();
+    ref.watch(mapIdProvider.notifier).updateMapId(mapId: "shizuoka");
+  }
+
+  @override
   Widget build(BuildContext context) {
     final shapes = ref.watch(mapShapesProvider).mapShapes;
     final mapId = ref.watch(mapIdProvider).id;
@@ -43,6 +52,8 @@ class SvgMapState extends ConsumerState<SvgMap> {
 
     final printName =
         Prefecture.prefecture_name[Prefecture.prefecture_id[mapId]];
+
+    final BuildContext buildContext = context;
 
     return Flex(
       direction: Axis.vertical,
@@ -92,6 +103,9 @@ class SvgMapState extends ConsumerState<SvgMap> {
                       );
                 } else {
                   // ToDo ゲームの終了処理を入れる
+                  Future<void>.delayed(const Duration(milliseconds: 2000), () {
+                    GoRouter.of(buildContext).go('/result');
+                  });
                 }
               }
 
