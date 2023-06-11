@@ -1,41 +1,77 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:guess_the_city/svg_map.dart';
+import 'package:guess_the_city/view/game_screen.dart';
+import 'package:guess_the_city/view/home_screen.dart';
+import 'package:guess_the_city/view/result_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ProviderScope(child: MyApp()),
+  );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+
+  final GoRouter goRouter = GoRouter(
+    routes: [
+      // top-level
+      GoRoute(
+        path: '/',
+        builder: (context, state) => const HomeScreen(),
+        routes: [
+          GoRoute(
+            path: 'game',
+            builder: (context, state) => const GameScreen(),
+          ),
+          GoRoute(
+            path: 'result',
+            builder: (context, state) => const ResultScreen(),
+          ),
+        ],
+      ),
+    ],
+  );
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Guess the city',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(),
+      debugShowCheckedModeBanner: false,
+      routerConfig: goRouter,
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
+class MyHomePage extends ConsumerStatefulWidget {
   const MyHomePage({
     super.key,
   });
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  ConsumerState<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends ConsumerState<MyHomePage> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("○○市をクリック"),
+        title: const Text("Guess The City"),
       ),
-      body: const Placeholder(),
+      body: const Center(
+        child: SvgMap(),
+      ),
     );
   }
 }
