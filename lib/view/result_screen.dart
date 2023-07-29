@@ -11,7 +11,7 @@ class ResultScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            'Thank you for Playing!!',
+            'Thank you for playing!!',
             style: TextStyle(
               color: Colors.orange,
               decoration: TextDecoration.none,
