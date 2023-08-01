@@ -75,6 +75,7 @@ flutter:
    - assets/maps/shizuoka19.svg
    - assets/maps/sample.drawio.svg
    - assets/maps/Japan_template_large.svg
+   - assets/image/japan_color.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

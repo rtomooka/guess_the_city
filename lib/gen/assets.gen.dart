@@ -9,6 +9,17 @@
 
 import 'package:flutter/widgets.dart';
 
+class $AssetsImageGen {
+  const $AssetsImageGen();
+
+  /// File path: assets/image/japan_color.png
+  AssetGenImage get japanColor =>
+      const AssetGenImage('assets/image/japan_color.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [japanColor];
+}
+
 class $AssetsMapsGen {
   const $AssetsMapsGen();
 
@@ -28,6 +39,7 @@ class $AssetsMapsGen {
 class Assets {
   Assets._();
 
+  static const $AssetsImageGen image = $AssetsImageGen();
   static const $AssetsMapsGen maps = $AssetsMapsGen();
 }
 
