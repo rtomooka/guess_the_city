@@ -1,7 +1,7 @@
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
-import 'package:guess_the_city/map_shape.dart';
+import 'package:guess_the_city/model/map_shape.dart';
 
 class SvgMapPainter extends CustomPainter {
   SvgMapPainter({

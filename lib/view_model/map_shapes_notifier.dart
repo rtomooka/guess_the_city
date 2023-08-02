@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:guess_the_city/gen/assets.gen.dart';
-import 'package:guess_the_city/map_shape.dart';
+import 'package:guess_the_city/model/map_shape.dart';
 import 'package:guess_the_city/model/map_shapes.dart';
-import 'package:guess_the_city/shizuoka_map_helper.dart';
+import 'package:guess_the_city/view_model/shizuoka_map_helper.dart';
 import 'package:xml/xml.dart';
 
 class MapShapesNotifier extends StateNotifier<MapShapes> {
