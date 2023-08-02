@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:guess_the_city/gen/assets.gen.dart';
+import 'package:guess_the_city/widget/menu_button.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -19,20 +19,18 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           children: [
             Expanded(
-              flex: 7,
+              flex: 5,
               child: Stack(
                 alignment: Alignment.center,
                 children: [
                   Assets.image.japanColor.image(),
-                  FittedBox(
-                    child: Container(
-                      color: Colors.white,
-                      child: Text(
-                        'Guess The City',
-                        style: TextStyle(
-                          fontSize: 48,
-                          color: Colors.blue,
-                        ),
+                  const FittedBox(
+                    child: Text(
+                      'GUESS THE CITY',
+                      style: TextStyle(
+                        fontSize: 64,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.redAccent,
                       ),
                     ),
                   ),
@@ -41,11 +39,20 @@ class HomeScreen extends StatelessWidget {
             ),
             Expanded(
               flex: 2,
-              child: ElevatedButton(
-                onPressed: () {
-                  GoRouter.of(context).go('/game');
-                },
-                child: const Text('Go Game'),
+              child: FittedBox(
+                child: Column(
+                  children: [
+                    MenuButton(
+                      path: '/game',
+                      title: 'START GAME',
+                    ),
+                    Padding(padding: EdgeInsets.symmetric(vertical: 4.0)),
+                    MenuButton(
+                      path: '/information',
+                      title: 'INFORMATION',
+                    ),
+                  ],
+                ),
               ),
             ),
             Expanded(
