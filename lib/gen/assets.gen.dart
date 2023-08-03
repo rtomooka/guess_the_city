@@ -9,6 +9,34 @@
 
 import 'package:flutter/widgets.dart';
 
+class $AssetsImageGen {
+  const $AssetsImageGen();
+
+  /// File path: assets/image/introduction_1.png
+  AssetGenImage get introduction1 =>
+      const AssetGenImage('assets/image/introduction_1.png');
+
+  /// File path: assets/image/introduction_2.png
+  AssetGenImage get introduction2 =>
+      const AssetGenImage('assets/image/introduction_2.png');
+
+  /// File path: assets/image/introduction_3.png
+  AssetGenImage get introduction3 =>
+      const AssetGenImage('assets/image/introduction_3.png');
+
+  /// File path: assets/image/introduction_4.png
+  AssetGenImage get introduction4 =>
+      const AssetGenImage('assets/image/introduction_4.png');
+
+  /// File path: assets/image/japan_color.png
+  AssetGenImage get japanColor =>
+      const AssetGenImage('assets/image/japan_color.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values =>
+      [introduction1, introduction2, introduction3, introduction4, japanColor];
+}
+
 class $AssetsMapsGen {
   const $AssetsMapsGen();
 
@@ -28,6 +56,7 @@ class $AssetsMapsGen {
 class Assets {
   Assets._();
 
+  static const $AssetsImageGen image = $AssetsImageGen();
   static const $AssetsMapsGen maps = $AssetsMapsGen();
 }
 

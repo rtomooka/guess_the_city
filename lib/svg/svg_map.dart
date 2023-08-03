@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:guess_the_city/map_shape.dart';
-import 'package:guess_the_city/shizuoka_map_helper.dart';
-import 'package:guess_the_city/svg_map_painter.dart';
+import 'package:guess_the_city/model/map_shape.dart';
+import 'package:guess_the_city/svg/svg_map_painter.dart';
 import 'package:guess_the_city/view_model/map_id_notifier.dart';
 import 'package:guess_the_city/view_model/map_shapes_notifier.dart';
+import 'package:guess_the_city/view_model/shizuoka_map_helper.dart';
 
 class SvgMap extends ConsumerStatefulWidget {
   const SvgMap({Key? key}) : super(key: key);

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
-import 'package:go_router/go_router.dart';
+import 'package:guess_the_city/gen/assets.gen.dart';
+import 'package:guess_the_city/widget/menu_button.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -14,48 +14,75 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Padding(padding: EdgeInsets.only(bottom: 400)),
-          const Text('Guess The City')
-              .animate(
-                onPlay: (controller) => controller.repeat(
-                    period: const Duration(milliseconds: 3000)),
-              )
-              .then(duration: const Duration(milliseconds: 200))
-              .shake(),
-          const Padding(padding: EdgeInsets.symmetric(vertical: 8.0)),
-          ElevatedButton(
-            onPressed: () {
-              GoRouter.of(context).go('/game');
-            },
-            child: const Text('Go Game'),
-          ),
-          const Padding(padding: EdgeInsets.only(bottom: 400)),
-          FutureBuilder(
-            future: getVersionInfo(),
-            builder: (BuildContext context, AsyncSnapshot snapshot) {
-              return Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+    return Scaffold(
+      body: Center(
+        child: Column(
+          children: [
+            Expanded(
+              flex: 5,
+              child: Stack(
+                alignment: Alignment.center,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
+                  Assets.image.japanColor.image(),
+                  const FittedBox(
                     child: Text(
-                      snapshot.hasData ? snapshot.data : '',
-                      style:
-                          Theme.of(context).textTheme.headlineSmall?.copyWith(
-                                fontSize: 14.0,
-                              ),
-                      textAlign: TextAlign.right,
+                      'GUESS THE CITY',
+                      style: TextStyle(
+                        fontSize: 64,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.redAccent,
+                      ),
                     ),
                   ),
                 ],
-              );
-            },
-          ),
-        ],
+              ),
+            ),
+            Expanded(
+              flex: 2,
+              child: FittedBox(
+                child: Column(
+                  children: [
+                    MenuButton(
+                      path: '/game',
+                      title: 'START GAME',
+                    ),
+                    Padding(padding: EdgeInsets.symmetric(vertical: 4.0)),
+                    MenuButton(
+                      path: '/information',
+                      title: 'INFORMATION',
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 1,
+              child: FutureBuilder(
+                future: getVersionInfo(),
+                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          snapshot.hasData ? snapshot.data : '',
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineSmall
+                              ?.copyWith(
+                                fontSize: 14.0,
+                              ),
+                          textAlign: TextAlign.right,
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:guess_the_city/svg_map.dart';
+import 'package:guess_the_city/svg/svg_map.dart';
 import 'package:guess_the_city/view/game_screen.dart';
 import 'package:guess_the_city/view/home_screen.dart';
+import 'package:guess_the_city/view/information_screen.dart';
 import 'package:guess_the_city/view/result_screen.dart';
 
 void main() {
@@ -25,6 +26,10 @@ class MyApp extends StatelessWidget {
           GoRoute(
             path: 'game',
             builder: (context, state) => const GameScreen(),
+          ),
+          GoRoute(
+            path: 'information',
+            builder: (context, state) => const InformationScreen(),
           ),
           GoRoute(
             path: 'result',
