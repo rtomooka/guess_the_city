@@ -14,25 +14,28 @@ class InformationScreen extends StatelessWidget {
           scrollPhysics: const BouncingScrollPhysics(),
           pages: [
             PageViewModel(
-              reverse: true,
               title: 'ゲームの始めかた',
               body: '"START GAME"を選択してください',
-              footer: Image.asset(Assets.image.introduction1.path),
+              image: Image.asset(Assets.image.introduction1.path),
+              decoration: const PageDecoration(bodyFlex: 1, imageFlex: 2),
             ),
             PageViewModel(
               title: '遊び方',
               body: '画面上に表示される市を地図から選択してください',
-              footer: Image.asset(Assets.image.introduction2.path),
+              image: Image.asset(Assets.image.introduction2.path),
+              decoration: const PageDecoration(bodyFlex: 1, imageFlex: 2),
             ),
             PageViewModel(
               title: '遊び方',
               body: '正解すると白に変わります',
-              footer: Image.asset(Assets.image.introduction3.path),
+              image: Image.asset(Assets.image.introduction3.path),
+              decoration: const PageDecoration(bodyFlex: 1, imageFlex: 2),
             ),
             PageViewModel(
               title: '終わり方',
               body: 'ゲームを終了するときは、ブラウザを閉じてください',
-              footer: Image.asset(Assets.image.introduction4.path),
+              image: Image.asset(Assets.image.introduction4.path),
+              decoration: const PageDecoration(bodyFlex: 1, imageFlex: 2),
             ),
           ],
           onDone: () {
