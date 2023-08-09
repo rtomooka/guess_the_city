@@ -83,7 +83,7 @@ flutter:
    - assets/image/introduction_2.png
    - assets/image/introduction_3.png
    - assets/image/introduction_4.png
-   - assets/gif/splash.gif
+   - assets/gif/indeterminate.gif
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -112,6 +112,9 @@ flutter:
   # see https://flutter.dev/custom-fonts/#from-packages
 
 flutter_native_splash:
-  color: "#42a5f5"
-  image: 'assets/gif/splash.gif'
-  color_dark: '#262626'
+  color: "#357ED4"
+  color_dark: '#357ED4'
+  fullscreen: true
+  web_image_mode: center
+  image: 'assets/gif/indeterminate.gif'
+

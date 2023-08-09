@@ -12,11 +12,12 @@ import 'package:flutter/widgets.dart';
 class $AssetsGifGen {
   const $AssetsGifGen();
 
-  /// File path: assets/gif/splash.gif
-  AssetGenImage get splash => const AssetGenImage('assets/gif/splash.gif');
+  /// File path: assets/gif/indeterminate.gif
+  AssetGenImage get indeterminate =>
+      const AssetGenImage('assets/gif/indeterminate.gif');
 
   /// List of all assets
-  List<AssetGenImage> get values => [splash];
+  List<AssetGenImage> get values => [indeterminate];
 }
 
 class $AssetsImageGen {
