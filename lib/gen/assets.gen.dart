@@ -9,6 +9,17 @@
 
 import 'package:flutter/widgets.dart';
 
+class $AssetsGifGen {
+  const $AssetsGifGen();
+
+  /// File path: assets/gif/indeterminate.gif
+  AssetGenImage get indeterminate =>
+      const AssetGenImage('assets/gif/indeterminate.gif');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [indeterminate];
+}
+
 class $AssetsImageGen {
   const $AssetsImageGen();
 
@@ -56,6 +67,7 @@ class $AssetsMapsGen {
 class Assets {
   Assets._();
 
+  static const $AssetsGifGen gif = $AssetsGifGen();
   static const $AssetsImageGen image = $AssetsImageGen();
   static const $AssetsMapsGen maps = $AssetsMapsGen();
 }
