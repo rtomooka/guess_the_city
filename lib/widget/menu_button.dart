@@ -15,25 +15,27 @@ class MenuButton extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final hover = useState(false);
-    return MouseRegion(
-      cursor: SystemMouseCursors.click,
-      onEnter: (_) => hover.value = true,
-      onExit: (_) => hover.value = false,
-      child: ElevatedButton(
-        onPressed: () {
-          GoRouter.of(context).go(path);
-        },
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.transparent,
-          shadowColor: Colors.transparent,
-        ),
-        child: Text(
-          title,
-          style: TextStyle(
-              decoration: hover.value ? TextDecoration.underline : null,
-              fontSize: 48,
-              color: Colors.black,
-              fontWeight: FontWeight.bold),
+    return FittedBox(
+      child: MouseRegion(
+        cursor: SystemMouseCursors.click,
+        onEnter: (_) => hover.value = true,
+        onExit: (_) => hover.value = false,
+        child: ElevatedButton(
+          onPressed: () {
+            GoRouter.of(context).go(path);
+          },
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.transparent,
+            shadowColor: Colors.transparent,
+          ),
+          child: Text(
+            title,
+            style: TextStyle(
+                decoration: hover.value ? TextDecoration.underline : null,
+                fontSize: 48,
+                color: Colors.black,
+                fontWeight: FontWeight.bold),
+          ),
         ),
       ),
     );
