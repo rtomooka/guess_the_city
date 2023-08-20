@@ -6,6 +6,7 @@ import 'package:guess_the_city/view/game_screen.dart';
 import 'package:guess_the_city/view/home_screen.dart';
 import 'package:guess_the_city/view/information_screen.dart';
 import 'package:guess_the_city/view/result_screen.dart';
+import 'package:guess_the_city/view/stage_select_screen.dart';
 
 void main() {
   runApp(
@@ -26,6 +27,10 @@ class MyApp extends StatelessWidget {
           GoRoute(
             path: 'game',
             builder: (context, state) => const GameScreen(),
+          ),
+          GoRoute(
+            path: 'stageSelect',
+            builder: (context, state) => const StageSelectScreen(),
           ),
           GoRoute(
             path: 'information',

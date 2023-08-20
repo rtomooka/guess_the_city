@@ -79,6 +79,8 @@ flutter:
   assets:
    - assets/maps/shizuoka19.svg
    - assets/maps/tokyo70.svg
+   - assets/image/shizuoka-illust2.png
+   - assets/image/tokyo-illust1.png
    - assets/image/japan_color.png
    - assets/image/introduction_1.png
    - assets/image/introduction_2.png

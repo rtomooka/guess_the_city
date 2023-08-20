@@ -10,5 +10,6 @@ class MapShapes with _$MapShapes {
   const factory MapShapes({
     required List<MapShape> mapShapes,
     required Size size,
+    required String svgPath,
   }) = _MapShapes;
 }
