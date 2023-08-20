@@ -4,7 +4,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:guess_the_city/gen/assets.gen.dart';
 import 'package:guess_the_city/model/map_shape.dart';
 import 'package:guess_the_city/model/map_shapes.dart';
 import 'package:xml/xml.dart';
@@ -15,14 +14,19 @@ class MapShapesNotifier extends StateNotifier<MapShapes> {
           const MapShapes(
             mapShapes: [],
             size: Size(0, 0),
+            svgPath: '',
           ),
-        ) {
-    parseSvgData();
-  }
+        ) {}
 
   // map更新
   void updateMapShapes({required List<MapShape> mapShapes}) {
     state = state.copyWith(mapShapes: mapShapes);
+  }
+
+  // svg設定
+  Future<void> setSvgPath(String svgPath) async {
+    state = state.copyWith(svgPath: svgPath);
+    await parseSvgData();
   }
 
   // SVGファイル読み込み
@@ -30,8 +34,10 @@ class MapShapesNotifier extends StateNotifier<MapShapes> {
     List<MapShape> mapShapes = [];
     Size size = const Size(0, 0);
 
+    if (state.svgPath.isEmpty) return;
+
     // map読み込み
-    await rootBundle.load(Assets.maps.shizuoka19).then((ByteData byteData) {
+    await rootBundle.load(state.svgPath).then((ByteData byteData) {
       // debugPrint("load: ${byteData.lengthInBytes}");
 
       // バイナリとして読み込み >> 文字列に変換 >> XML要素に変換

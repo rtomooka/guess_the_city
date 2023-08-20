@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$MapShapes {
   List<MapShape> get mapShapes => throw _privateConstructorUsedError;
   Size get size => throw _privateConstructorUsedError;
+  String get svgPath => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MapShapesCopyWith<MapShapes> get copyWith =>
@@ -29,7 +30,7 @@ abstract class $MapShapesCopyWith<$Res> {
   factory $MapShapesCopyWith(MapShapes value, $Res Function(MapShapes) then) =
       _$MapShapesCopyWithImpl<$Res, MapShapes>;
   @useResult
-  $Res call({List<MapShape> mapShapes, Size size});
+  $Res call({List<MapShape> mapShapes, Size size, String svgPath});
 }
 
 /// @nodoc
@@ -47,6 +48,7 @@ class _$MapShapesCopyWithImpl<$Res, $Val extends MapShapes>
   $Res call({
     Object? mapShapes = null,
     Object? size = null,
+    Object? svgPath = null,
   }) {
     return _then(_value.copyWith(
       mapShapes: null == mapShapes
@@ -57,6 +59,10 @@ class _$MapShapesCopyWithImpl<$Res, $Val extends MapShapes>
           ? _value.size
           : size // ignore: cast_nullable_to_non_nullable
               as Size,
+      svgPath: null == svgPath
+          ? _value.svgPath
+          : svgPath // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -68,7 +74,7 @@ abstract class _$$_MapShapesCopyWith<$Res> implements $MapShapesCopyWith<$Res> {
       __$$_MapShapesCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<MapShape> mapShapes, Size size});
+  $Res call({List<MapShape> mapShapes, Size size, String svgPath});
 }
 
 /// @nodoc
@@ -84,6 +90,7 @@ class __$$_MapShapesCopyWithImpl<$Res>
   $Res call({
     Object? mapShapes = null,
     Object? size = null,
+    Object? svgPath = null,
   }) {
     return _then(_$_MapShapes(
       mapShapes: null == mapShapes
@@ -94,6 +101,10 @@ class __$$_MapShapesCopyWithImpl<$Res>
           ? _value.size
           : size // ignore: cast_nullable_to_non_nullable
               as Size,
+      svgPath: null == svgPath
+          ? _value.svgPath
+          : svgPath // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -102,7 +113,9 @@ class __$$_MapShapesCopyWithImpl<$Res>
 
 class _$_MapShapes implements _MapShapes {
   const _$_MapShapes(
-      {required final List<MapShape> mapShapes, required this.size})
+      {required final List<MapShape> mapShapes,
+      required this.size,
+      required this.svgPath})
       : _mapShapes = mapShapes;
 
   final List<MapShape> _mapShapes;
@@ -115,10 +128,12 @@ class _$_MapShapes implements _MapShapes {
 
   @override
   final Size size;
+  @override
+  final String svgPath;
 
   @override
   String toString() {
-    return 'MapShapes(mapShapes: $mapShapes, size: $size)';
+    return 'MapShapes(mapShapes: $mapShapes, size: $size, svgPath: $svgPath)';
   }
 
   @override
@@ -128,12 +143,13 @@ class _$_MapShapes implements _MapShapes {
             other is _$_MapShapes &&
             const DeepCollectionEquality()
                 .equals(other._mapShapes, _mapShapes) &&
-            (identical(other.size, size) || other.size == size));
+            (identical(other.size, size) || other.size == size) &&
+            (identical(other.svgPath, svgPath) || other.svgPath == svgPath));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_mapShapes), size);
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(_mapShapes), size, svgPath);
 
   @JsonKey(ignore: true)
   @override
@@ -145,12 +161,15 @@ class _$_MapShapes implements _MapShapes {
 abstract class _MapShapes implements MapShapes {
   const factory _MapShapes(
       {required final List<MapShape> mapShapes,
-      required final Size size}) = _$_MapShapes;
+      required final Size size,
+      required final String svgPath}) = _$_MapShapes;
 
   @override
   List<MapShape> get mapShapes;
   @override
   Size get size;
+  @override
+  String get svgPath;
   @override
   @JsonKey(ignore: true)
   _$$_MapShapesCopyWith<_$_MapShapes> get copyWith =>
