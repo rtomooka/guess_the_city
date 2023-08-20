@@ -43,9 +43,24 @@ class $AssetsImageGen {
   AssetGenImage get japanColor =>
       const AssetGenImage('assets/image/japan_color.png');
 
+  /// File path: assets/image/shizuoka-illust2.png
+  AssetGenImage get shizuokaIllust2 =>
+      const AssetGenImage('assets/image/shizuoka-illust2.png');
+
+  /// File path: assets/image/tokyo-illust1.png
+  AssetGenImage get tokyoIllust1 =>
+      const AssetGenImage('assets/image/tokyo-illust1.png');
+
   /// List of all assets
-  List<AssetGenImage> get values =>
-      [introduction1, introduction2, introduction3, introduction4, japanColor];
+  List<AssetGenImage> get values => [
+        introduction1,
+        introduction2,
+        introduction3,
+        introduction4,
+        japanColor,
+        shizuokaIllust2,
+        tokyoIllust1
+      ];
 }
 
 class $AssetsMapsGen {
