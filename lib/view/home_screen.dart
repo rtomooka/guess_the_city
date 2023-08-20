@@ -37,13 +37,13 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-            Expanded(
+            const Expanded(
               flex: 2,
               child: FittedBox(
                 child: Column(
                   children: [
                     MenuButton(
-                      path: '/game',
+                      path: '/stageSelect',
                       title: 'START GAME',
                     ),
                     Padding(padding: EdgeInsets.symmetric(vertical: 4.0)),
