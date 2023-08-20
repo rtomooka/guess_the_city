@@ -61,24 +61,18 @@
   </style>
  </defs>
 
-
   <g
    id="Plan_x0020_1"
    inkscape:label="Plan 1">
    <metadata
    id="CorelCorpID_0Corel-Layer" /> 
    <rect
-   style="opacity:1;fill:#a2d9f7;fill-opacity:1;stroke-width:61.2781"
-   id="rect3431"
+   style="opacity:1;fill:#a2d9f7;fill-opacity:1;stroke-width:61.2781"   
    width="28000"
    height="14000"
    x="1000"
    y="1000"
-   inkscape:label="rect3431" />
-   </g>
-   <g
-   id="layer1"
-   inkscape:label="Plan 2">
+   id="tokyo" />
    <!-- 渋谷区 -->
    <g
    id="shibuya"

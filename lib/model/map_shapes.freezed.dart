@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$MapShapes {
   List<MapShape> get mapShapes => throw _privateConstructorUsedError;
+  Size get size => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MapShapesCopyWith<MapShapes> get copyWith =>
@@ -28,7 +29,7 @@ abstract class $MapShapesCopyWith<$Res> {
   factory $MapShapesCopyWith(MapShapes value, $Res Function(MapShapes) then) =
       _$MapShapesCopyWithImpl<$Res, MapShapes>;
   @useResult
-  $Res call({List<MapShape> mapShapes});
+  $Res call({List<MapShape> mapShapes, Size size});
 }
 
 /// @nodoc
@@ -45,12 +46,17 @@ class _$MapShapesCopyWithImpl<$Res, $Val extends MapShapes>
   @override
   $Res call({
     Object? mapShapes = null,
+    Object? size = null,
   }) {
     return _then(_value.copyWith(
       mapShapes: null == mapShapes
           ? _value.mapShapes
           : mapShapes // ignore: cast_nullable_to_non_nullable
               as List<MapShape>,
+      size: null == size
+          ? _value.size
+          : size // ignore: cast_nullable_to_non_nullable
+              as Size,
     ) as $Val);
   }
 }
@@ -62,7 +68,7 @@ abstract class _$$_MapShapesCopyWith<$Res> implements $MapShapesCopyWith<$Res> {
       __$$_MapShapesCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<MapShape> mapShapes});
+  $Res call({List<MapShape> mapShapes, Size size});
 }
 
 /// @nodoc
@@ -77,12 +83,17 @@ class __$$_MapShapesCopyWithImpl<$Res>
   @override
   $Res call({
     Object? mapShapes = null,
+    Object? size = null,
   }) {
     return _then(_$_MapShapes(
       mapShapes: null == mapShapes
           ? _value._mapShapes
           : mapShapes // ignore: cast_nullable_to_non_nullable
               as List<MapShape>,
+      size: null == size
+          ? _value.size
+          : size // ignore: cast_nullable_to_non_nullable
+              as Size,
     ));
   }
 }
@@ -90,7 +101,8 @@ class __$$_MapShapesCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_MapShapes implements _MapShapes {
-  const _$_MapShapes({required final List<MapShape> mapShapes})
+  const _$_MapShapes(
+      {required final List<MapShape> mapShapes, required this.size})
       : _mapShapes = mapShapes;
 
   final List<MapShape> _mapShapes;
@@ -102,8 +114,11 @@ class _$_MapShapes implements _MapShapes {
   }
 
   @override
+  final Size size;
+
+  @override
   String toString() {
-    return 'MapShapes(mapShapes: $mapShapes)';
+    return 'MapShapes(mapShapes: $mapShapes, size: $size)';
   }
 
   @override
@@ -112,12 +127,13 @@ class _$_MapShapes implements _MapShapes {
         (other.runtimeType == runtimeType &&
             other is _$_MapShapes &&
             const DeepCollectionEquality()
-                .equals(other._mapShapes, _mapShapes));
+                .equals(other._mapShapes, _mapShapes) &&
+            (identical(other.size, size) || other.size == size));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_mapShapes));
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_mapShapes), size);
 
   @JsonKey(ignore: true)
   @override
@@ -127,11 +143,14 @@ class _$_MapShapes implements _MapShapes {
 }
 
 abstract class _MapShapes implements MapShapes {
-  const factory _MapShapes({required final List<MapShape> mapShapes}) =
-      _$_MapShapes;
+  const factory _MapShapes(
+      {required final List<MapShape> mapShapes,
+      required final Size size}) = _$_MapShapes;
 
   @override
   List<MapShape> get mapShapes;
+  @override
+  Size get size;
   @override
   @JsonKey(ignore: true)
   _$$_MapShapesCopyWith<_$_MapShapes> get copyWith =>

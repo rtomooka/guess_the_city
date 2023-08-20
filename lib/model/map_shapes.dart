@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:guess_the_city/model/map_shape.dart';
 
@@ -8,5 +9,6 @@ part 'map_shapes.freezed.dart';
 class MapShapes with _$MapShapes {
   const factory MapShapes({
     required List<MapShape> mapShapes,
+    required Size size,
   }) = _MapShapes;
 }
