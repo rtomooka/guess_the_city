@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:guess_the_city/widget/menu_button.dart';
 
 class ResultScreen extends StatefulWidget {
-  ResultScreen({Key? key}) : super(key: key);
+  const ResultScreen({Key? key}) : super(key: key);
 
   @override
   State<ResultScreen> createState() => _ResultScreenState();
