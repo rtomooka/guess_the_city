@@ -10,7 +10,13 @@ import 'package:guess_the_city/model/map_shapes.dart';
 import 'package:xml/xml.dart';
 
 class MapShapesNotifier extends StateNotifier<MapShapes> {
-  MapShapesNotifier() : super(const MapShapes(mapShapes: [])) {
+  MapShapesNotifier()
+      : super(
+          const MapShapes(
+            mapShapes: [],
+            size: Size(0, 0),
+          ),
+        ) {
     parseSvgData();
   }
 
@@ -22,6 +28,7 @@ class MapShapesNotifier extends StateNotifier<MapShapes> {
   // SVGファイル読み込み
   Future<void> parseSvgData() async {
     List<MapShape> mapShapes = [];
+    Size size = const Size(0, 0);
 
     // map読み込み
     await rootBundle.load(Assets.maps.shizuoka19).then((ByteData byteData) {
@@ -31,16 +38,25 @@ class MapShapesNotifier extends StateNotifier<MapShapes> {
       final document =
           XmlDocument.parse(utf8.decode(byteData.buffer.asUint8List()));
       final svgRoot = document.findAllElements('svg').first;
+
+      // 地図サイズを取得
+      final viewBox = svgRoot.getAttribute('viewBox');
+      if (viewBox != null) {
+        final viewBoxValues = viewBox.split(' ').map(double.parse).toList();
+        if (viewBoxValues.length == 4) {
+          size = Size(viewBoxValues[2], viewBoxValues[3]);
+        }
+      }
       final strokeRoot = svgRoot.findElements('g').first;
       final prefectures = strokeRoot.children;
 
-      // SVGファイルを解析
-      prefectures.forEach((node) {
+      // 地形情報の解析
+      for (var node in prefectures) {
         final id = node.getAttribute("id");
         if (id != null) {
           final label = node.getAttribute("title");
           final paths = node.findAllElements("path");
-          paths.forEach((element) {
+          for (var element in paths) {
             final data = element.getAttribute("d");
             // debugPrint("data: $data");
             // final printName =
@@ -52,18 +68,23 @@ class MapShapesNotifier extends StateNotifier<MapShapes> {
               enable: true,
               id: id,
             ));
-          });
+          }
           // print(label);
         }
-      });
+      }
     });
-    state = state.copyWith(mapShapes: mapShapes);
+
+    state = state.copyWith(
+      mapShapes: mapShapes,
+      size: size,
+    );
   }
 
+  // サイズ更新
   Future<void> updateSize(Size size) async {
     final fs = applyBoxFit(
       BoxFit.contain,
-      const Size(29700, 21000),
+      state.size,
       size,
     );
     final rect = Alignment.center.inscribe(fs.destination, Offset.zero & size);
