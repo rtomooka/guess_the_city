@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:guess_the_city/model/map_shape.dart';
 import 'package:guess_the_city/svg/svg_map_painter.dart';
-import 'package:guess_the_city/view_model/map_id_notifier.dart';
 import 'package:guess_the_city/view_model/map_shapes_notifier.dart';
-import 'package:guess_the_city/view_model/shizuoka_map_helper.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class SvgMap extends ConsumerStatefulWidget {
+class SvgMap extends StatefulHookConsumerWidget {
   const SvgMap({Key? key}) : super(key: key);
 
   @override
@@ -33,26 +32,33 @@ class SvgMapState extends ConsumerState<SvgMap> {
     super.dispose();
     // ゲームの初期化
     ref.watch(mapShapesProvider.notifier).parseSvgData();
-    ref.watch(mapIdProvider.notifier).updateMapId(mapId: "shizuoka");
   }
 
   @override
   Widget build(BuildContext context) {
     final shapes = ref.watch(mapShapesProvider).mapShapes;
-    final mapId = ref.watch(mapIdProvider).id;
+    final expShape = useState(MapShape(
+      '',
+      label: '',
+      color: Colors.transparent,
+      enable: false,
+      id: '',
+    ));
 
     if (shapes.isEmpty) {
       // 初期化が完了するまでローディング表示
       return const CircularProgressIndicator();
     }
 
+    // マップからランダムに1つ選択
+    final MapShape? mapShape = getRandomEnabledMapShape(shapes);
+    if (!expShape.value.enable && mapShape != null) {
+      expShape.value = mapShape;
+    }
+
     // 画面サイズに応じてリサイズ
     final size = MediaQuery.of(context).size;
     ref.watch(mapShapesProvider.notifier).updateSize(size);
-
-    final printName =
-        Prefecture.prefecture_name[Prefecture.prefecture_id[mapId]];
-
     final BuildContext buildContext = context;
 
     return Flex(
@@ -64,7 +70,7 @@ class SvgMapState extends ConsumerState<SvgMap> {
             color: Colors.orange,
             child: Center(
               child: Text(
-                "$printNameを選択してください",
+                "${expShape.value.label}を選択してください",
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 16,
@@ -85,7 +91,7 @@ class SvgMapState extends ConsumerState<SvgMap> {
                 final selected = path!.contains(event.localPosition);
 
                 // 正解
-                if (selected && (shape.id == mapId)) {
+                if (selected && (shape.id == expShape.value.id)) {
                   shape.enable = false;
                   shape.color = Colors.white;
                   updateFlag = true;
@@ -98,11 +104,9 @@ class SvgMapState extends ConsumerState<SvgMap> {
                 // enableなshapeを1つ選択する
                 final MapShape? mapShape = getRandomEnabledMapShape(mapShapes);
                 if (mapShape != null) {
-                  ref.watch(mapIdProvider.notifier).updateMapId(
-                        mapId: mapShape.id,
-                      );
+                  expShape.value = mapShape;
                 } else {
-                  // ToDo ゲームの終了処理を入れる
+                  // すべてのshapeが回答済みの場合は、ゲームクリア
                   Future<void>.delayed(const Duration(milliseconds: 2000), () {
                     GoRouter.of(buildContext).go('/result');
                   });
