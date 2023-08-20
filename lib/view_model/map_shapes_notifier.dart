@@ -7,7 +7,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:guess_the_city/gen/assets.gen.dart';
 import 'package:guess_the_city/model/map_shape.dart';
 import 'package:guess_the_city/model/map_shapes.dart';
-import 'package:guess_the_city/view_model/shizuoka_map_helper.dart';
 import 'package:xml/xml.dart';
 
 class MapShapesNotifier extends StateNotifier<MapShapes> {
@@ -35,23 +34,26 @@ class MapShapesNotifier extends StateNotifier<MapShapes> {
       final strokeRoot = svgRoot.findElements('g').first;
       final prefectures = strokeRoot.children;
 
+      // SVGファイルを解析
       prefectures.forEach((node) {
         final id = node.getAttribute("id");
         if (id != null) {
+          final label = node.getAttribute("title");
           final paths = node.findAllElements("path");
           paths.forEach((element) {
             final data = element.getAttribute("d");
             // debugPrint("data: $data");
-            final printName =
-                Prefecture.prefecture_name[Prefecture.prefecture_id[id]];
+            // final printName =
+            //     Prefecture.prefecture_name[Prefecture.prefecture_id[id]];
             mapShapes.add(MapShape(
               data,
-              label: printName ?? "Invalid Name",
+              label: label ?? "Invalid Name",
               color: const Color.fromRGBO(60, 128, 74, 1.0),
               enable: true,
               id: id,
             ));
           });
+          // print(label);
         }
       });
     });

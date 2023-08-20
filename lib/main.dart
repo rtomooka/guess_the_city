@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
           ),
           GoRoute(
             path: 'result',
-            builder: (context, state) => ResultScreen(),
+            builder: (context, state) => const ResultScreen(),
           ),
         ],
       ),

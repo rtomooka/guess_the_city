@@ -51,17 +51,14 @@ class $AssetsImageGen {
 class $AssetsMapsGen {
   const $AssetsMapsGen();
 
-  /// File path: assets/maps/Japan_template_large.svg
-  String get japanTemplateLarge => 'assets/maps/Japan_template_large.svg';
-
-  /// File path: assets/maps/sample.drawio.svg
-  String get sampleDrawio => 'assets/maps/sample.drawio.svg';
-
   /// File path: assets/maps/shizuoka19.svg
   String get shizuoka19 => 'assets/maps/shizuoka19.svg';
 
+  /// File path: assets/maps/tokyo70.svg
+  String get tokyo70 => 'assets/maps/tokyo70.svg';
+
   /// List of all assets
-  List<String> get values => [japanTemplateLarge, sampleDrawio, shizuoka19];
+  List<String> get values => [shizuoka19, tokyo70];
 }
 
 class Assets {
