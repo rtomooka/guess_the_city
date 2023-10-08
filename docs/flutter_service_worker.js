@@ -14,7 +14,7 @@ const RESOURCES = {"assets/AssetManifest.json": "40caaf6d2f9320bbbdb1c9d7e4a1319
 "assets/assets/image/shizuoka-illust2.png": "c06b15e467ce9108a676346b6c3ebeb6",
 "assets/assets/image/tokyo-illust1.png": "026001ca6ca2b54635605877d408988e",
 "assets/assets/maps/shizuoka19.svg": "b7f6283ad26b4fd5dfb1f130d9dedcc0",
-"assets/assets/maps/tokyo70.svg": "aee075befff46e959935544d5da2afa6",
+"assets/assets/maps/tokyo70.svg": "2909acdb4be90b363e745458bb3c76d5",
 "assets/FontManifest.json": "dc3d03800ccca4601324923c0b1d6d57",
 "assets/fonts/MaterialIcons-Regular.otf": "62ec8220af1fb03e1c20cfa38781e17e",
 "assets/NOTICES": "14fe8407bb8a66e106c76eea957699f8",
@@ -33,8 +33,8 @@ const RESOURCES = {"assets/AssetManifest.json": "40caaf6d2f9320bbbdb1c9d7e4a1319
 "icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1",
 "icons/Icon-maskable-192.png": "c457ef57daa1d16f64b27b786ec2ea3c",
 "icons/Icon-maskable-512.png": "301a7604d45b3e739efc881eb04896ea",
-"index.html": "499413da9d357280c80a60e826e10c2d",
-"/": "499413da9d357280c80a60e826e10c2d",
+"index.html": "7b407c030af1bd3045f95aa01b94a1d1",
+"/": "7b407c030af1bd3045f95aa01b94a1d1",
 "main.dart.js": "557d0287b4eafa3b78fa5388aaed00e9",
 "manifest.json": "89227500777a87addf5561f77ea87013",
 "splash/img/dark-1x.gif": "9799748df204430842a2d2029197c9ae",
@@ -53,7 +53,7 @@ const RESOURCES = {"assets/AssetManifest.json": "40caaf6d2f9320bbbdb1c9d7e4a1319
 "splash/img/light-3x.png": "1da85f64232ddc36fe88f3a273128ed1",
 "splash/img/light-4x.gif": "d346da5df32ce7b88768348a6b8ce269",
 "splash/img/light-4x.png": "39a41238eabcaf12e46a2bf14ab3812b",
-"version.json": "d77f7807693b34233c4f8964dc74dfa6"};
+"version.json": "a2ecf55af236d3eac8037fe25f9780cc"};
 // The application shell files that are downloaded before a service worker can
 // start.
 const CORE = ["main.dart.js",
